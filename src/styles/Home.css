@@ -1,0 +1,29 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+h1{
+  text-align: center;
+  color: #00949b;  
+}
+
+.home-container {
+  height: 100vh;
+ 
+}
+
+.home-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.home-content p{
+  font-size: 18px;
+  color: #ec0d71;
+  padding: 10px;
+}
