@@ -1,6 +1,7 @@
 body{
-   background-image: url("../public/images/bg1.png");
+   /* background-image: url("../public/images/bg1.png"); */
   background-size: cover;
   background-position: center;
   background-repeat: repeat-y;
+  background-color: rgb(252, 247, 242);
 }

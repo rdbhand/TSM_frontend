@@ -1,5 +1,4 @@
 import './App.css';
-import Nav from './components/Nav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';    
 import Home from './components/Home';
 import About from './components/About';
@@ -7,13 +6,12 @@ import Contact from './components/Contact';
 import RegLogin from './components/RegLogin';
 import UserDashboard from './components/UserDashboard';
 import ServiceProviderDashboard from './components/ServiceProviderDashboard';
-
+import { UserContext } from './components/UserContext';
 function App() {
   return (
     <div className="App">
-      
+      <UserContext.Provider>
       <BrowserRouter>
-      <Nav/>
       <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/about' element={<About/>}></Route>
@@ -25,6 +23,8 @@ function App() {
 
 
       </BrowserRouter>
+
+      </UserContext.Provider>
     </div>
   );
 }

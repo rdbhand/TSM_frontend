@@ -1,117 +1,320 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import '../styles/RegLogin.css';
+import Nav from "./Nav";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function RegLogin(){
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    role: '',
-    address: '',
-    password: '',
-    phone: ''
+import "../styles/RegLogin.css";
+function RegLogin() {
+  const [user, setUser] = useState("user");
+  const [reg, setReg] = useState(false);
+  const [formdata, setFormdata] = useState({
+    name: "",
+    email: "",
+    address: "",
+    phone: "",
+    password: "",
+    role: user,
   });
-
-  const [formName, setFormName] = useState('register');
-
-  const handleChange = (e) => {
-    setFormData({ 
-      ...formData,
-      [e.target.name]: e.target.value 
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const response = await fetch("http://localhost:8080/api/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    });
-
-    if (response.ok) {
-      alert("User Registered Successfully!");
-      setFormData({
-        name: '',
-        email: '',
-        role: '',
-        address: '',
-        password: '',
-        phone: ''
-      });
-    } else {
-      alert("Registration Failed!");
-    }
-  };
 
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-    const response = await fetch("http://localhost:8080/api/users/login", {
+  const email = formdata.email;
+  const password = formdata.password;
+
+  try {
+    const res = await fetch("http://localhost:8080/api/users/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
-        role: formData.role
-      })
+      body: JSON.stringify({ email }),
     });
 
-    if (response.ok) {
-      alert("Login Successful!");
-      if(formData.role === 'user') {
-        navigate('/user-dashboard');
-      } else if(formData.role === 'serviceProvider') {
-        navigate('/service-provider-dashboard');
+    const data = await res.json();
+
+    if (res.ok) {
+      // ✅ check entered password with API password
+      if (data.password === password) {
+        alert("Login successful ✅");
+        if(user==="user"){
+          navigate("/user-dashboard");
+        }
+        else{
+          navigate("/service-provider-dashboard");
+        }
+        console.log("User details:", data);
+      } else {
+        alert("Invalid password ❌");
       }
-      setFormData({
-        name: '',
-        email: '',
-        role: '',
-        address: '',
-        password: '',
-        phone: ''
-      });
-       
     } else {
-      alert("Login Failed!");
+      alert(data.message || "Login failed");
     }
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Something went wrong!");
   }
-  if (formName === 'register') {
+};
+
+
+  const handleRegister = (event) => {
+    // Handling registration logic here
+    event.preventDefault();
+    // console.log("Registration data:", formdata);
+    fetch("http://localhost:8080/api/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formdata),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Registration successful:", data);
+        // Handle successful registration (e.g., redirect or show a message)
+      })
+      .catch((error) => {
+        console.error("Error during registration:", error);
+        // Handle error (e.g., show an error message)
+      });
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      Name : <input type="text" name="name" value={formData.name} onChange={handleChange}  required /><br />
-      Email : <input type="email" name="email" value={formData.email} onChange={handleChange} required /><br />
-      Role : &nbsp; &nbsp; &nbsp;<input type="radio" name="role" value="user" onChange={handleChange} /> User
-      &nbsp;
-      &nbsp;
-      <input type="radio" name="role" value="serviceProvider" onChange={handleChange} /> Service Provider<br /> <br/>
-      Address : <input type="text" name="address" value={formData.address} onChange={handleChange} /><br />
-      Phone : <input type="phone" name="phone" value={formData.phone} onChange={handleChange} /><br />
-      Password : <input type="password" name="password" value={formData.password} onChange={handleChange} required /><br />
-      <button type="submit">Register</button>
-      <button type="button" onClick ={()=>setFormName('login')}>Already have an account? Login</button>
-    </form>
+    <>
+      <Nav />
+      <div className="role-selection">
+        {reg && "Register as : "}
+        {!reg && "Login as : "} &nbsp; &nbsp; &nbsp;
+        <input
+          type="radio"
+          name="role"
+          value={user}
+          checked={user === "user"}
+          required
+          onChange={() => {
+            setUser("user");
+            setFormdata({ ...formdata, role: "user" });
+          }}
+        />{" "}
+        User &nbsp;
+        <input
+          type="radio"
+          name="role"
+          value={user}
+          checked={user === "serviceProvider"}
+          required
+          onChange={() => {
+            setUser("serviceProvider");
+            setFormdata({ ...formdata, role: "serviceProvider" });
+          }}
+        />{" "}
+        Service Provider
+      </div>
+      <form>
+        {user === "user" && reg ? (
+          <div>
+            <h2>User Registration</h2>
+            Name:{" "}
+            <input
+              type="text"
+              name="name"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, name: event.target.value });
+              }}
+            />
+            <br />
+            Email:{" "}
+            <input
+              type="email"
+              name="email"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, email: event.target.value });
+              }}
+            />
+            <br />
+            Address:{" "}
+            <input
+              type="text"
+              name="address"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, address: event.target.value });
+              }}
+            />
+            <br />
+            Phone:{" "}
+            <input
+              type="phone"
+              name="phone"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, phone: event.target.value });
+              }}
+            />
+            <br />
+            Password:{" "}
+            <input
+              type="password"
+              name="password"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, password: event.target.value });
+              }}
+            />
+            <br />
+            <button type="submit" onClick={handleRegister}>
+              Register
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setReg(false);
+              }}
+            >
+              Already Registered? Login
+            </button>
+          </div>
+        ) : user === "user" && !reg ? (
+          <div>
+            <h2>User Login</h2>
+            Email:{" "}
+            <input
+              type="email"
+              name="email"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, email: event.target.value });
+              }}
+            />
+            <br />
+            Password:{" "}
+            <input
+              type="password"
+              name="password"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, password: event.target.value });
+              }}
+            />
+            <br />
+            <button type="submit" onClick={handleLogin}>
+              Login
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setReg(true);
+              }}
+            >
+              New User? Register
+            </button>
+          </div>
+        ) : user === "serviceProvider" && reg ? (
+          <div>
+            <h2>Service Provider Registration</h2>
+            Service Provider Name:{" "}
+            <input
+              type="text"
+              name="name"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, name: event.target.value });
+              }}
+            />
+            <br />
+            Service Provider Email:{" "}
+            <input
+              type="email"
+              name="email"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, email: event.target.value });
+              }}
+            />
+            <br />
+            Service Provider Address:{" "}
+            <input
+              type="text"
+              name="address"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, address: event.target.value });
+              }}
+            />
+            <br />
+            Service Provider Phone:{" "}
+            <input
+              type="phone"
+              name="phone"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, phone: event.target.value });
+              }}
+            />
+            <br />
+            Password:{" "}
+            <input
+              type="password"
+              name="password"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, password: event.target.value });
+              }}
+            />
+            <br />
+            <button type="submit" onClick={handleRegister}>
+              Register
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setReg(false);
+              }}
+            >
+              Already Registered? Login
+            </button>
+          </div>
+        ) : (
+          <div>
+            <h2>Service Provider Login</h2>
+            Email:{" "}
+            <input
+              type="email"
+              name="email"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, email: event.target.value });
+              }}
+            />
+            <br />
+            Password:{" "}
+            <input
+              type="password"
+              name="password"
+              required
+              onChange={(event) => {
+                setFormdata({ ...formdata, password: event.target.value });
+              }}
+            />
+            <br />
+            <button type="submit" onClick={handleLogin}>
+              Login
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setReg(true);
+              }}
+            >
+              New Service Provider? Register
+            </button>
+          </div>
+        )}
+      </form>
+    </>
   );
-}
-else{
-  return (
-    <form onSubmit={handleLogin}>
-      Login as : <input type="radio" name="role" value="user" onChange={handleChange} required />User
-      &nbsp; &nbsp; &nbsp;<input type="radio" name="role" value="serviceProvider" onChange={handleChange} /> serviceProvider<br/><br/>
-      Email : <input type="email" name="email" value={formData.email} onChange={handleChange} required /><br />
-      Password : <input type="password" name="password" value={formData.password} onChange={handleChange} required /><br />
-      <button type="submit">Login</button>
-      <button type="button" onClick ={()=>setFormName('register')}>Not Registered? Register</button>
-    </form>
-  );
-}
 }
 export default RegLogin;

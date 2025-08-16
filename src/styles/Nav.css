@@ -3,39 +3,74 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+}
 
+.box{
+  height: 10vh;
+  align-content: center;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  background-color: #fcf2e8;
+}
+
+.dummy-box{
+  height: 10vh;
 }
 
 .nav-container{
-  background-color: rgb(235, 206, 185);
+  background-color: rgb(255, 255, 255);
   height: 8vh;
-  width: 100vw;
+  width: 90vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color:rebeccapurple;
   font-weight: 600;
-
+  margin:auto;
+  border-radius: 10px;
 }
 
 .leftnav{
   display: flex;
   flex-direction: row;
   width: 50vw;
-  justify-content: space-evenly;
+  justify-content: center;
   list-style-type: none;
-   
+  color:rgb(0, 0, 0);
+  align-content: center;
+  align-items: center;
 }
+
 .rightnav{
   display: flex;
   top:0;
   flex-direction: row;
-  width: 20vw;
+  width: 60vw;
   justify-content: space-evenly;
   list-style-type: none;
 }
 
 .nav-link{
    text-decoration: none;
+   color:rgb(0, 0, 0);
+   padding:5px;
+   border-radius: 5px;
+}
+
+.logo-span{
+  background-image: url('../../public/images/tiffin.png');
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.login-btn{
+  background-color: #ff8503;
+  text-decoration: none;
+   color:white;
+   padding:5px;
+   border-radius: 5px;
 }

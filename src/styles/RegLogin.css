@@ -1,9 +1,22 @@
-/* Container form styling */
+.role-selection{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width:30vw;
+  margin: 20px auto;
+  padding: 10px 10px;;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 2px #eeeded;
+  border-radius: 10px;
+}
+
+
 form {
   width: 400px;
   margin: 20px auto;
   padding: 30px;
-  background-color: #f1d6bc;
+  background-color: white;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -66,5 +79,11 @@ button[type="button"] {
   cursor: pointer;
   width: 100%;
   font-size: 16px;
+}
+
+form h2{
+  text-align: center;
+  margin: 10px auto;
+  color: #005697;
 }
 
