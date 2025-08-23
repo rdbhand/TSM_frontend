@@ -15,17 +15,25 @@
 
 .left-panel {
   width: 20%;
-  background-color: #06556b;
+  background-color: #edf2f7;
   padding: 20px;
   height: 100%;
   color: white;
+  border-right: 2px solid black;
 }
 
 .left-panel button{
   width: 80%;
-  background-color: aquamarine;
-  color:red;
+  height: 6vh;
+  background-color: rgb(255, 255, 255);
+  color:rgb(132, 11, 11);
   cursor: pointer;
+  margin: 10px 20px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 0px solid transparent;
+  font-size: larger;
+  box-shadow: 2px 2px 5px rgb(0, 0, 0);
 }
 
 .right-panel {
@@ -33,4 +41,9 @@
   padding: 20px;
   height: 100%;
   color:black;
+}
+
+.selectedBtn{
+  background-color: rgb(132, 11, 11);
+  color: white;
 }

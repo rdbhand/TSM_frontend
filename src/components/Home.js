@@ -1,7 +1,6 @@
 import '../styles/Home.css'
 import Nav from './Nav';
 import { Link } from 'react-router-dom';
-
 function Home() {
   return (
     <>

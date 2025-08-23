@@ -2,6 +2,8 @@ import Nav from "./Nav";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
 import "../styles/RegLogin.css";
 function RegLogin() {
   const [user, setUser] = useState("user");
@@ -14,6 +16,8 @@ function RegLogin() {
     password: "",
     role: user,
   });
+
+  const {setUserData} = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -35,9 +39,11 @@ const handleLogin = async (e) => {
     const data = await res.json();
 
     if (res.ok) {
-      // ✅ check entered password with API password
       if (data.password === password) {
         alert("Login successful ✅");
+
+        setUserData(data);
+
         if(user==="user"){
           navigate("/user-dashboard");
         }
@@ -71,12 +77,14 @@ const handleLogin = async (e) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Registration successful:", data);
-        // Handle successful registration (e.g., redirect or show a message)
+        
+        alert("Registration successful:");
+        setReg(false);
+        
       })
       .catch((error) => {
         console.error("Error during registration:", error);
-        // Handle error (e.g., show an error message)
+        
       });
   };
 

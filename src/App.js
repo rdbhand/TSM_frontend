@@ -7,10 +7,16 @@ import RegLogin from './components/RegLogin';
 import UserDashboard from './components/UserDashboard';
 import ServiceProviderDashboard from './components/ServiceProviderDashboard';
 import { UserContext } from './components/UserContext';
+
+import { useState } from 'react';
+import Testing from './components/Testing';
 function App() {
+
+  const [userData, setUserData] = useState({});
+
   return (
     <div className="App">
-      <UserContext.Provider>
+      <UserContext.Provider value={{userData, setUserData}}>
       <BrowserRouter>
       <Routes>
       <Route path='/' element={<Home/>}></Route>
@@ -19,6 +25,7 @@ function App() {
       <Route path='/reglogin' element={<RegLogin/>}></Route>
       <Route path='/user-dashboard' element={<UserDashboard/>}></Route>
       <Route path='/service-provider-dashboard' element={<ServiceProviderDashboard/>}></Route>
+      <Route path='/testing' element={<Testing/>}></Route>
       </Routes>
 
 
