@@ -8,14 +8,14 @@ function Nav(){
 
       <ul className="leftnav">
         <span className='logo-span'></span>
-        <li>ONLINE TIFFIN SERVICE</li>
+        <li>Web Based Tiffin Service Management</li>
       </ul>
       <ul className="rightnav">
         <li><Link to="/" className="nav-link">Home</Link></li>
         <li><Link to="/about" className="nav-link">About</Link></li>
         <li><Link to="/contact" className="nav-link">Contact</Link></li>
         <li>
-          <Link to="/reglogin" className='login-btn'>Login</Link>
+          <Link to="/reglogin" className='login-btn'>Register / Login</Link>
         </li>
       </ul>
     </div>

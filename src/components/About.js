@@ -1,6 +1,7 @@
 import Nav from './Nav';
 import React from 'react';
 import '../styles/About.css';
+import Footer from './Footer';
 
 const About = () => {
   return (
@@ -24,6 +25,9 @@ const About = () => {
         Thank you for trusting our service. We look forward to serving you with quality food and care.
       </p>
     </div>
+    <br/><br/><br/><br/><br/><br/><br/>
+
+    <Footer/>    
     </>
     
   );

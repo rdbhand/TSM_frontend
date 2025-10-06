@@ -15,17 +15,31 @@
 
 .left-panel {
   width: 20%;
-  background-color: #06556b;
+  background-color: #f9efe7;
   padding: 20px;
   height: 100%;
   color: white;
+  border-right: 1px solid rgb(7, 0, 0);
 }
 
 .left-panel button{
   width: 80%;
-  background-color: aquamarine;
-  color:red;
+  height: 6vh;
   cursor: pointer;
+  margin: 10px 20px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 0px solid transparent;
+  font-size: 80%;
+  font-weight: bold;
+  overflow:hidden;
+  box-shadow: 2px 2px 5px rgb(0, 0, 0);
+}
+
+.left-panel button:hover{
+  background-color: rgb(18, 140, 174);
+  color: white;
+  transition: 0.5s;
 }
 
 .right-panel {
@@ -33,4 +47,28 @@
   padding: 20px;
   height: 100%;
   color:black;
+  background-color: #ffffff;
+   overflow-y: scroll;
+}
+.btn{
+  background-color: rgb(255, 255, 255);
+  color:rgb(132, 11, 11);
+}
+.selectedBtn{
+  background-color: rgb(132, 11, 11);
+  color: white;
+}
+
+.logout-btn{
+  width: 80%;
+  height: 6vh;
+  cursor: pointer;
+  margin: 10px 20px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 0px solid transparent;
+  font-size: larger;
+  box-shadow: 2px 2px 5px rgb(0, 0, 0);
+  background-color: rgb(247, 48, 48);
+  color: white;
 }

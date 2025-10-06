@@ -4,7 +4,9 @@ import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useState } from "react";
 
-import SDashboard from "./ServiceProviderPages/SDashboard";
+import ProviderForm from "./ServiceProviderPages/ProviderForm";
+import PlanForm from "./ServiceProviderPages/PlanForm";
+import ProfilePage from "./ServiceProviderPages/ProfilePage";
 
 function ServiceProviderDashboard() {
   const navigate = useNavigate();
@@ -24,45 +26,62 @@ function ServiceProviderDashboard() {
     <>
       <div className="dashboard-container">
         <div className="left-panel">
+          <div className="logo">
+            <h2 style={{color:"blue", textAlign:"center"}}>👨🏻‍🍳 Service Provider</h2>
+          </div>
           <button onClick={()=>{
             setSelectedPage("dashboard");
-          }} className={(selectedPage==="dashboard")? "selectedBtn":""}> Dashboard </button>
+          }} 
+          className={(selectedPage==="dashboard")? "selectedBtn":"btn"}> Dashboard 
+          </button>
 
           <button onClick={()=>{
             setSelectedPage("plans");
-          }}> Manage Plans </button>
+          }}
+          className={(selectedPage==="plans")? "selectedBtn":"btn"}
+          > 
+          Manage Plans </button>
 
           <button onClick={()=>{
             setSelectedPage("users");
-          }}> Manage Users </button>
+          }}
+          className={(selectedPage==="users")? "selectedBtn":"btn"}> 
+          Manage Users </button>
 
           <button onClick={()=>{
             setSelectedPage("payments");
-          }}> Payments </button>
+          }}
+          className={(selectedPage==="payments")? "selectedBtn":"btn"}> Payments </button>
 
           <button onClick={()=>{
             setSelectedPage("feedback");
-          }}> Feedback & Ratings </button>
+          }}
+          className={(selectedPage==="feedback")? "selectedBtn":"btn"}> Feedback </button>
 
           <button onClick={()=>{
             setSelectedPage("analytics");
-          }}> Analytics </button>
+          }}
+          className={(selectedPage==="analytics")? "selectedBtn":"btn"}> Analytics </button>
 
           <button onClick={()=>{
             setSelectedPage("profile");
-          }}> Profile Settings </button>
+          }}
+          className={(selectedPage==="profile")? "selectedBtn":"btn"}
+          > Profile Settings </button>
 
-          <button onClick={handleLogout}> Logout </button>
+          <button onClick={handleLogout}className={"logout-btn"}> Logout </button>
 
         </div>
 
         <div className="right-panel">
           {selectedPage==="dashboard" && <div>
             <h2>Dashboard</h2>
+              <ProviderForm userData={userData}/>
             </div>}
 
           {selectedPage==="plans" && <div>          
           <h2>Manage Plans Page</h2>
+          <PlanForm/>
           </div>}
           {selectedPage==="users" && 
           <div>
@@ -79,6 +98,7 @@ function ServiceProviderDashboard() {
             </div>}
           {selectedPage==="profile" && <div>
             <h2>Profile Settings</h2>
+            <ProfilePage/>
             </div>}
         </div>
       </div>

@@ -1,20 +1,28 @@
 import '../styles/Home.css'
 import Nav from './Nav';
 import { Link } from 'react-router-dom';
+import RegLogin from './RegLogin';
+import Footer from './Footer';
 function Home() {
   return (
     <>
     <Nav/>
+
   <div className="home-container">
     <div className="home-poster">  
       <div className="left-poster">
         <h1>Healthy Homemade Tiffins Delivered Daily</h1>
         <div>
-            <Link to="/reglogin" className="login-btn">Login as Customer</Link> &nbsp; &nbsp;&nbsp; &nbsp;
-            <Link to="/reglogin" className="login-btn">Login as Seller</Link>
+            {/* <Link to="/reglogin" className="login-btn">Login as Customer</Link> &nbsp; &nbsp;&nbsp; &nbsp; */}
+            <Link to="/reglogin" className="login-btn">Login / Register</Link> to Get Started!
         </div>
       </div>
       <div className="right-poster">
+      </div>
+      <div>
+        
+      </div>
+      <div>
       </div>
     </div>
 
@@ -39,6 +47,11 @@ function Home() {
       </div>
     </div>
   </div>
+
+    {/* <RegLogin/> */}
+    <br/>
+    <br/>
+    <Footer/>
     </>
   );
 }

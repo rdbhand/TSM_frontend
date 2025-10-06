@@ -2,6 +2,7 @@ import Nav from './Nav';
 
 import React, { useState } from 'react';
 import '../styles/Contact.css';
+import Footer from './Footer';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -61,6 +62,10 @@ const Contact = () => {
         <button type="submit">Send Message</button>
       </form>
     </div>   
+
+    <br/><br/><br/><br/><br/><br/>
+
+    <Footer/>  
     </>
     
   );
