@@ -43,7 +43,8 @@ const handleLogin = async (e) => {
         alert("Login successful ✅");
 
         setUserData(data);
-
+        data.password = ""; // Clear password before storing in sessionStorage
+        sessionStorage.setItem("userData", JSON.stringify(data));
         if(user==="user"){
           navigate("/user-dashboard");
         }

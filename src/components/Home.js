@@ -5,16 +5,17 @@ import RegLogin from './RegLogin';
 import Footer from './Footer';
 function Home() {
   return (
-    <>
+    <div id="home-page">
     <Nav/>
 
   <div className="home-container">
     <div className="home-poster">  
       <div className="left-poster">
-        <h1>Healthy Homemade Tiffins Delivered Daily</h1>
+        <h1>Welcome to Tiffin Service Management</h1>
+        <h3>Healthy Homemade Tiffins Delivered Daily / Monthly</h3>
         <div>
             {/* <Link to="/reglogin" className="login-btn">Login as Customer</Link> &nbsp; &nbsp;&nbsp; &nbsp; */}
-            <Link to="/reglogin" className="login-btn">Login / Register</Link> to Get Started!
+            <Link to="/reglogin" className="login-btn">Get Started !</Link>
         </div>
       </div>
       <div className="right-poster">
@@ -52,7 +53,7 @@ function Home() {
     <br/>
     <br/>
     <Footer/>
-    </>
+    </div>
   );
 }
 export default Home;

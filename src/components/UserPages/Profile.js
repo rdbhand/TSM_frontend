@@ -1,11 +1,9 @@
 import ProfilePage from "./ProfilePage";
 
-const Profile = ({ userData }) => {
+const Profile = () => {
   return (
     <div>
-      <h2>My Profile</h2>
-      <p>View and edit your profile information here, {userData?.name || "friend"}.</p>
-      <ProfilePage/>
+      <ProfilePage />
     </div>
   );
 };

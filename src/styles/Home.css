@@ -3,6 +3,12 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  background-color:rgb(255, 255, 255);  
+}
+
+#home-page{
+  background-color:rgb(255, 255, 255);  
+  padding-bottom: 20px;
 }
 
 h1{
@@ -13,21 +19,22 @@ h1{
 
 .home-container {
   height: 100vh;
- 
+  background-color:rgb(255, 255, 255);  
 }
 
 
 .home-poster{
-  width: 80vw;
-  height: 50vh;
+  width: 80%;
+  height: 60vh;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  margin: auto;
+  margin: 5px auto;
   padding: 10px;
-  background-color: rgb(255, 237, 233);
-  border-radius: 10px;;
+  background-color:rgb(255, 255, 255);  
+  border-radius: 10px;
+  /* border:1px solid rgb(255, 106, 0); */
 }
 
 .left-poster{
@@ -38,32 +45,47 @@ h1{
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
+  border-radius:5px;
+  align-content: center;
+  padding:10px;
+  border: 1px solid rgb(2, 0, 105);
+  box-shadow: 5px 5px 5px rgba(16, 50, 129, 0.4);
 }
 
 .right-poster{
-  width: 25%;
+  width: 30%;
   height: 100%;
   background-image: url('../../public/images/tiffin_img_1.png');
   background-size: cover;
   background-position: center;
   border-radius: 10px;
+  margin: auto;
+  border: 1px solid rgb(2, 0, 105);
+  box-shadow: 5px 5px 5px rgba(16, 50, 129, 0.4);
 }
 
 .home-features{
   width: 80vw;
-  height: 30vh;
+  height: 40vh;
   margin: auto;
   padding: 10px;
   border-radius: 10px;
   text-align: center;
+  overflow: hidden;
+  background-color:rgb(255, 255, 255);  
+}
+
+.home-features h2{
+  background-color:rgb(255, 255, 255);  
 }
 
 .feature-list{
-  height: 40vh;
+  height: 25vh;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;  
+  background-color:rgb(255, 255, 255);  
 }
 .feature-item{
   width: 20%;
@@ -74,5 +96,6 @@ h1{
   align-items: center;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+  border: 1px solid rgb(2, 0, 105);
+  box-shadow: 5px 5px 5px rgba(16, 50, 129, 0.4);
 }

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import '../styles/ServiceProviderDashboard.css';
+import "../styles/ServiceProviderDashboard.css";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useState } from "react";
@@ -13,10 +13,9 @@ function ServiceProviderDashboard() {
 
   const { userData, setUserData } = useContext(UserContext);
 
-  const[selectedPage, setSelectedPage]=useState("dashboard");
+  const [selectedPage, setSelectedPage] = useState("dashboard");
 
-
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     alert("Logout Successful!");
     setUserData({});
     navigate("/");
@@ -27,79 +26,124 @@ function ServiceProviderDashboard() {
       <div className="dashboard-container">
         <div className="left-panel">
           <div className="logo">
-            <h2 style={{color:"blue", textAlign:"center"}}>👨🏻‍🍳 Service Provider</h2>
+            <h2 style={{ color: "blue", textAlign: "center" }}>
+              👨🏻‍🍳 Service Provider
+            </h2>
           </div>
-          <button onClick={()=>{
-            setSelectedPage("dashboard");
-          }} 
-          className={(selectedPage==="dashboard")? "selectedBtn":"btn"}> Dashboard 
+          <button
+            onClick={() => {
+              setSelectedPage("dashboard");
+            }}
+            className={selectedPage === "dashboard" ? "selectedBtn" : "btn"}
+          >
+            {" "}
+            Dashboard
           </button>
 
-          <button onClick={()=>{
-            setSelectedPage("plans");
-          }}
-          className={(selectedPage==="plans")? "selectedBtn":"btn"}
-          > 
-          Manage Plans </button>
+          <button
+            onClick={() => {
+              setSelectedPage("plans");
+            }}
+            className={selectedPage === "plans" ? "selectedBtn" : "btn"}
+          >
+            Manage Plans{" "}
+          </button>
 
-          <button onClick={()=>{
-            setSelectedPage("users");
-          }}
-          className={(selectedPage==="users")? "selectedBtn":"btn"}> 
-          Manage Users </button>
+          <button
+            onClick={() => {
+              setSelectedPage("users");
+            }}
+            className={selectedPage === "users" ? "selectedBtn" : "btn"}
+          >
+            Manage Users{" "}
+          </button>
 
-          <button onClick={()=>{
-            setSelectedPage("payments");
-          }}
-          className={(selectedPage==="payments")? "selectedBtn":"btn"}> Payments </button>
+          <button
+            onClick={() => {
+              setSelectedPage("payments");
+            }}
+            className={selectedPage === "payments" ? "selectedBtn" : "btn"}
+          >
+            {" "}
+            Payments{" "}
+          </button>
 
-          <button onClick={()=>{
-            setSelectedPage("feedback");
-          }}
-          className={(selectedPage==="feedback")? "selectedBtn":"btn"}> Feedback </button>
+          <button
+            onClick={() => {
+              setSelectedPage("feedback");
+            }}
+            className={selectedPage === "feedback" ? "selectedBtn" : "btn"}
+          >
+            {" "}
+            Feedback{" "}
+          </button>
 
-          <button onClick={()=>{
-            setSelectedPage("analytics");
-          }}
-          className={(selectedPage==="analytics")? "selectedBtn":"btn"}> Analytics </button>
+          <button
+            onClick={() => {
+              setSelectedPage("analytics");
+            }}
+            className={selectedPage === "analytics" ? "selectedBtn" : "btn"}
+          >
+            {" "}
+            Analytics{" "}
+          </button>
 
-          <button onClick={()=>{
-            setSelectedPage("profile");
-          }}
-          className={(selectedPage==="profile")? "selectedBtn":"btn"}
-          > Profile Settings </button>
+          <button
+            onClick={() => {
+              setSelectedPage("profile");
+            }}
+            className={selectedPage === "profile" ? "selectedBtn" : "btn"}
+          >
+            {" "}
+            Profile Settings{" "}
+          </button>
 
-          <button onClick={handleLogout}className={"logout-btn"}> Logout </button>
-
+          <button onClick={handleLogout} className={"logout-btn"}>
+            {" "}
+            Logout{" "}
+          </button>
         </div>
 
         <div className="right-panel">
-          {selectedPage==="dashboard" && <div>
-            <h2>Dashboard</h2>
-              <ProviderForm userData={userData}/>
-            </div>}
+          {selectedPage === "dashboard" && (
+            <div>
+              <h2>Dashboard</h2>
+              <ProviderForm userData={userData} />
+            </div>
+          )}
 
-          {selectedPage==="plans" && <div>          
-          <h2>Manage Plans Page</h2>
-          <PlanForm/>
-          </div>}
-          {selectedPage==="users" && 
-          <div>
-            <h2>Users</h2>  
-          </div>}
-          {selectedPage==="payments" && <div>
-            <h2>Payments</h2>
-            </div>}
-          {selectedPage==="feedback" && <div>
-            <h2>Feedback & Ratings</h2>
-            </div>}
-          {selectedPage==="analytics" && <div>
-            <h2>Analytics</h2>
-            </div>}
-          {selectedPage==="profile" && <div>
-            <h2>Profile Settings</h2>
-            <ProfilePage/>
-            </div>}
+          {selectedPage === "plans" && (
+            <div>
+              <h2>Manage Plans Page</h2>
+              <PlanForm userData={userData} />
+            </div>
+          )}
+          {selectedPage === "users" && (
+            <div>
+              <h2>Users</h2>
+            </div>
+          )}
+          {selectedPage === "payments" && (
+            <div>
+              <h2>Payments</h2>
+            </div>
+          )}
+          {selectedPage === "feedback" && (
+            <div>
+              <h2>Feedback & Ratings</h2>
+            </div>
+          )}
+          {selectedPage === "analytics" && (
+            <div>
+              <h2>Analytics</h2>
+            </div>
+          )}
+          {selectedPage === "profile" && (
+            <div>
+              <h2>Profile Settings</h2>
+              <ProfilePage />
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -13,7 +13,6 @@ function ProviderForm({ userData }) {
 
   const [isInfoSet, setIsInfoSet] = useState(false);
 
-  // ✅ Fetch existing provider info when component mounts
 useEffect(() => {
   const fetchProviderInfo = async () => {
     try {
@@ -67,11 +66,10 @@ useEffect(() => {
     }
   };
 
-  // ✅ If provider info is already set, show details instead of form
   if (isInfoSet) {
     return (
-      <div className="p-4 border rounded-lg shadow">
-        <h2 className="text-lg font-bold mb-2">Provider Information</h2><hr/>
+      <div className="">
+        <h2 className="">Provider Information</h2><hr/>
         <p><strong>Business Name:</strong> {formData.businessName}</p>
         <p><strong>Address:</strong> {formData.businessAddress}</p>
         <p><strong>Contact:</strong> {formData.contactNumber}</p>
@@ -80,7 +78,7 @@ useEffect(() => {
         <p><strong>GST:</strong> {formData.gstNumber}</p>
         <button
           onClick={() => setIsInfoSet(false)}
-          className="mt-3 px-4 py-2 bg-blue-500 text-white rounded"
+          className=""
         >
           Edit Info
         </button>
@@ -88,10 +86,9 @@ useEffect(() => {
     );
   }
 
-  // ✅ If info not set → show form
   return (
-    <form onSubmit={handleSubmit} className="p-4 space-y-3 border rounded-lg shadow">
-      <h2 className="text-lg font-bold mb-2">Add Provider Information</h2>
+    <form onSubmit={handleSubmit} className="">
+      <h2 className="">Add Provider Information</h2>
 
       <input
         type="text"

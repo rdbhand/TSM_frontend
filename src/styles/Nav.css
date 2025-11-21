@@ -1,25 +1,27 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  background-color: white;
 }
 
-.box{
+.box {
   height: 10vh;
   align-content: center;
   position: fixed;
   width: 100%;
   z-index: 2;
-  background-color: #fcf2e8;
+  background-color: white;
+  border-bottom: 1px solid rgb(8, 0, 39);
 }
 
-.dummy-box{
+.dummy-box {
   height: 10vh;
 }
 
-.nav-container{
-  background-color: rgb(255, 255, 255);
+.nav-container {
+  background-color: rgb(21, 189, 208);
   height: 8vh;
   width: 90vw;
   display: flex;
@@ -27,39 +29,62 @@
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  margin:auto;
+  margin: auto;
   border-radius: 10px;
+  border: 2px solid rgb(9, 0, 48);
+  box-shadow: 0px 5px 5px rgb(23, 6, 121);
 }
 
-.leftnav{
+.leftnav {
   display: flex;
   flex-direction: row;
   width: 50vw;
   justify-content: center;
   list-style-type: none;
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   align-content: center;
   align-items: center;
+  border-radius: 5px;
+  background-color: inherit;
 }
 
-.rightnav{
+.leftnav li{
+  background-color: inherit;
+  color:rgb(5, 15, 132);
+}
+
+.rightnav {
   display: flex;
-  top:0;
   flex-direction: row;
   width: 60vw;
   justify-content: space-evenly;
   list-style-type: none;
+  align-items: center;
+  background-color: inherit;
 }
 
-.nav-link{
-   text-decoration: none;
-   color:rgb(0, 0, 0);
-   padding:5px;
-   border-radius: 5px;
+.rightnav li .nav-link{
+  border: 0.5px solid rgb(10, 3, 98);
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+  color:rgb(1, 1, 35)
+}
+.rightnav li .nav-link:hover{
+  background-color: rgb(15, 39, 227);
+  color: white;
+  transition: top 3s;
+  position: relative;
+  top: 2px;
+}
+.nav-link {
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
 }
 
-.logo-span{
-  background-image: url('../../public/images/tiffin.png');
+
+.logo-span {
+  background-image: url("../../public/images/tiffin.png");
   width: 50px;
   height: 50px;
   background-size: cover;
@@ -67,10 +92,19 @@
   border-radius: 50%;
 }
 
-.login-btn{
-  background-color: #ff8503;
+.login-btn {
+  background-color: #f4600b;
   text-decoration: none;
-   color:white;
-   padding:5px;
-   border-radius: 5px;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  /* box-shadow: 3px 3px 3px rgb(240, 89, 13); */
+  /* width:200px; */
+}
+
+.login-btn:hover {
+  background-color: rgb(255, 0, 0);
+  transition: top 2s;
+  position: relative;
+  top: 2px;
 }

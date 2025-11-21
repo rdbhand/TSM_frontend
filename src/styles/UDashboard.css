@@ -1,25 +1,50 @@
-*{
+* {
   margin: 0;
   padding: 0;
-  /* background-color: rgb(254, 192, 235); */
+  /* background-color: rgb(237, 222, 232); */
 }
 
-.provider-list{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.provider-list {
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
-.provider-card{
-  background-color: rgb(208, 243, 231);
+.provider-card {
+  background-color: rgb(255, 246, 240);
   width: 50%;
   padding: 10px;
-  border: 0.5px solid red;
-  margin: 5px;
+  border: 2px solid rgb(133, 6, 6);
+  margin: 15px auto;
   border-radius: 5px;
 }
 
-.provider-card *{
+.provider-card * {
   margin: 5px;
+  text-align: center;
 }
 
+.provider-card button {
+  background-color: rgb(255, 120, 24);
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.provider-card button:hover {
+  background-color: rgb(92, 38, 0);
+}
+
+.tiffin-plans {
+}
+
+.tiffin-plans button{
+  background-color: rgb(24, 106, 141);
+  width:20%;
+}
+
+.tiffin-plans button:hover{
+  background-color: rgb(201, 37, 37);
+}

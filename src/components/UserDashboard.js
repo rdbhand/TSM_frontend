@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import '../styles/UserDashboard.css';
+import "../styles/UserDashboard.css";
 import { UserContext } from "./UserContext";
 import { useContext, useState } from "react";
 import Dashboard from "./UserPages/Dashboard";
@@ -14,13 +14,15 @@ import Footer from "./Footer";
 
 function UserDashboard() {
   const navigate = useNavigate();
-  const { userData, setUserData } = useContext(UserContext);
+  const userData = sessionStorage.getItem("userData")
+    ? JSON.parse(sessionStorage.getItem("userData"))
+    : null;
 
   const [selectedPage, setSelectedPage] = useState("dashboard");
 
   const handleLogout = () => {
     alert("Logout Successful!");
-    setUserData({});
+    sessionStorage.removeItem("userData");
     navigate("/");
   };
 
@@ -29,8 +31,8 @@ function UserDashboard() {
       <div className="dashboard-container">
         {/* Left Panel (Menu) */}
         <div className="left-panel">
-           <div className="logo">
-            <h2 style={{color:"blue", textAlign:"center"}}>🙂 User </h2>
+          <div className="logo">
+            <h2 style={{ color: "blue", textAlign: "center" }}>🙂 User </h2>
           </div>
           <button
             onClick={() => setSelectedPage("dashboard")}
@@ -98,7 +100,9 @@ function UserDashboard() {
 
           {selectedPage === "menu" && <Menu userData={userData} />}
 
-          {selectedPage === "subscription" && <Subscription userData={userData} />}
+          {selectedPage === "subscription" && (
+            <Subscription userData={userData} />
+          )}
 
           {selectedPage === "payments" && <Payment userData={userData} />}
 
@@ -106,11 +110,11 @@ function UserDashboard() {
 
           {selectedPage === "offers" && <Notifications userData={userData} />}
 
-          {selectedPage === "profile" && <Profile userData={userData} />}
+          {selectedPage === "profile" && <Profile />}
         </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
