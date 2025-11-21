@@ -1,6 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
+export default function ProfilePage() {
+ const [userData] = useState(() => {
+  return sessionStorage.getItem("userData")
+    ? JSON.parse(sessionStorage.getItem("userData"))
+    : null;
+});
 
-export default function ProfilePage({ userId }) {
   const [profile, setProfile] = useState({
     name: "",
     email: "",
@@ -12,13 +17,26 @@ export default function ProfilePage({ userId }) {
 
   // Fetch profile on page load
   useEffect(() => {
+    console.log("User data in ProfilePage:", userData);
+    if (!userData || !userData.userId) return; // Prevent undefined error
+
     async function fetchProfile() {
-      const res = await fetch(`http://localhost:5000/api/users/${userId}`);
-      const data = await res.json();
-      setProfile({ ...data, password: "" }); // don't prefill password
+      try {
+        const res = await fetch(
+          `http://localhost:8080/api/user?id=${userData.userId}`
+        );
+        if (!res.ok) throw new Error("Failed to load profile");
+
+        const data = await res.json();
+        console.log("Fetched profile data:", data);
+        setProfile({ ...data, password: "" }); // Do not show password
+      } catch (err) {
+        console.error("Error fetching profile:", err);
+      }
     }
+
     fetchProfile();
-  }, [userId]);
+  }, [userData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,37 +45,54 @@ export default function ProfilePage({ userId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const updatedData = { ...profile };
-    if (!updatedData.password) delete updatedData.password; // don't update password if blank
+    if (!updatedData.password) delete updatedData.password;
 
-    const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedData),
-    });
+    try {
+      const res = await fetch(
+        `http://localhost:8080/api/users?id=${userData.userId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedData),
+        }
+      );
 
-    if (res.ok) alert("Profile updated successfully!");
-    else alert("Error updating profile");
+      if (res.ok) {
+        alert("Profile updated successfully!");
+      } else {
+        alert("Error updating profile");
+      }
+    } catch (err) {
+      console.error("Update error:", err);
+      alert("Server error");
+    }
   };
 
   return (
     <div>
-      <h2>Profile</h2>
+      <h2 style={{textAlign: "center"}}>My Profile</h2>
+
       <form onSubmit={handleSubmit} className="space-y-3">
+        <strong>Name :</strong> 
         <input
           type="text"
           name="name"
           placeholder="Full Name"
           value={profile.name}
           onChange={handleChange}
+          required
         />
+          <strong>Email :</strong> 
         <input
           type="email"
           name="email"
           placeholder="Email"
           value={profile.email}
-          disabled
+          readOnly // replaced disabled
         />
+          <strong> Phone :</strong>
         <input
           type="text"
           name="phone"
@@ -65,12 +100,14 @@ export default function ProfilePage({ userId }) {
           value={profile.phone}
           onChange={handleChange}
         />
+          <strong>Address :</strong> <br/>
         <textarea
           name="address"
           placeholder="Address"
           value={profile.address}
           onChange={handleChange}
-        />
+        /><br/>
+          <strong>Password :</strong>
         <input
           type="password"
           name="password"
@@ -78,11 +115,13 @@ export default function ProfilePage({ userId }) {
           value={profile.password}
           onChange={handleChange}
         />
-        <select name="role" value={profile.role} disabled>
-          <option value="user">User</option>
-          <option value="serviceProvider">Service Provider</option>
-        </select>
-        <button type="submit">Update Profile</button>
+          <strong>Role :</strong>
+      
+        <input type="text" name="role" value={profile.role} readOnly />
+        <br/> <br/>
+        <button type="submit" className="bg-blue-600 text-white p-2 rounded">
+          Update Profile
+        </button>
       </form>
     </div>
   );

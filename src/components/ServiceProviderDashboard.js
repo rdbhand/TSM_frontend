@@ -7,6 +7,7 @@ import { useState } from "react";
 import ProviderForm from "./ServiceProviderPages/ProviderForm";
 import PlanForm from "./ServiceProviderPages/PlanForm";
 import ProfilePage from "./ServiceProviderPages/ProfilePage";
+import TiffinMenu from "./ServiceProviderPages/TiffinMenu";
 
 function ServiceProviderDashboard() {
   const navigate = useNavigate();
@@ -47,6 +48,15 @@ function ServiceProviderDashboard() {
             className={selectedPage === "plans" ? "selectedBtn" : "btn"}
           >
             Manage Plans{" "}
+          </button>
+
+          <button
+            onClick={() => {
+              setSelectedPage("menu");
+            }}
+            className={selectedPage === "menu" ? "selectedBtn" : "btn"}
+          >
+            Manage Tiffin Menu{" "}
           </button>
 
           <button
@@ -116,6 +126,12 @@ function ServiceProviderDashboard() {
             <div>
               <h2>Manage Plans Page</h2>
               <PlanForm userData={userData} />
+            </div>
+          )}
+          {selectedPage === "menu" && (
+            <div>
+              <h2>Manage Tiffin Menu</h2>
+              <TiffinMenu/>
             </div>
           )}
           {selectedPage === "users" && (

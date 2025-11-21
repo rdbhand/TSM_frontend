@@ -8,9 +8,14 @@ const Dashboard = () => {
   const [error, setError] = useState(null);
 
   const [visiblePlans, setVisiblePlans] = useState({});
-  const [plansByProvider, setPlansByProvider] = useState({}); // 👈 STORES PLANS FOR EACH PROVIDER
+  const [plansByProvider, setPlansByProvider] = useState({});
+  const [subscribingPlan, setSubscribingPlan] = useState(null); // 👈 To disable button while subscribing
 
   const navigate = useNavigate();
+
+  // Get logged-in userId (from localStorage)
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+  const userId= userData ? userData.userId : null;
 
   useEffect(() => {
     const fetchAllProviders = async () => {
@@ -31,19 +36,15 @@ const Dashboard = () => {
     fetchAllProviders();
   }, []);
 
-  // 👇 Fetch plans only when user opens a provider
   const handleViewTiffinPlans = async (providerId) => {
     setVisiblePlans((prev) => ({
       ...prev,
       [providerId]: !prev[providerId],
     }));
 
-    // If already fetched, no need to fetch again
-    if (plansByProvider[providerId]) {
-      return;
-    }
+    if (plansByProvider[providerId]) return;
 
-    try{
+    try {
       const res = await fetch(
         `http://localhost:8080/api/plans?providerId=${providerId}`
       );
@@ -51,7 +52,6 @@ const Dashboard = () => {
 
       const plans = await res.json();
 
-      console.log("Fetched plans for provider", providerId, plans);
       setPlansByProvider((prev) => ({
         ...prev,
         [providerId]: plans,
@@ -62,6 +62,43 @@ const Dashboard = () => {
         ...prev,
         [providerId]: [],
       }));
+    }
+  };
+
+  // ⭐ GET PLAN / SUBSCRIBE PLAN
+  const handleGetPlan = async (planId) => {
+    if (!userId) {
+      alert("You must be logged in to subscribe!");
+      navigate("/reglogin");
+      return;
+    }
+
+    setSubscribingPlan(planId);
+
+    try {
+      const res = await fetch("http://localhost:8080/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: Number(userId),
+          planId: Number(planId),
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to subscribe");
+
+      const result = await res.json();
+
+      alert("Subscription successful!");
+
+      // Optional redirect
+      // navigate("/my-subscriptions");
+
+    } catch (err) {
+      console.error(err);
+      alert("Failed to subscribe. Please try again.");
+    } finally {
+      setSubscribingPlan(null);
     }
   };
 
@@ -77,40 +114,80 @@ const Dashboard = () => {
       {!loading &&
         providers.map((provider) => (
           <div key={provider.provider.userId} className="provider-card">
-            <p><strong>Tiffin Service Name:</strong> {provider.businessName}</p>
-            <p><strong>Address:</strong> {provider.businessAddress}</p>
-            <p><strong>Contact:</strong> {provider.contactNumber}</p>
-            <p><strong>Email:</strong> {provider.email}</p>
-            <p><strong>FSSAI:</strong> {provider.fssaiLicenseNumber}</p>
-            <p><strong>GST:</strong> {provider.gstNumber}</p>
+            <p>
+              <strong>Tiffin Service Name:</strong> {provider.businessName}
+            </p>
+            <p>
+              <strong>Address:</strong> {provider.businessAddress}
+            </p>
+            <p>
+              <strong>Contact:</strong> {provider.contactNumber}
+            </p>
+            <p>
+              <strong>Email:</strong> {provider.email}
+            </p>
+            <p>
+              <strong>FSSAI:</strong> {provider.fssaiLicenseNumber}
+            </p>
+            <p>
+              <strong>GST:</strong> {provider.gstNumber}
+            </p>
 
-            <button onClick={() => handleViewTiffinPlans(provider.provider.userId)}>
-              {visiblePlans[provider.provider.userId] ? "Hide Plans" : "View Plans"}
+            <button
+              onClick={() =>
+                handleViewTiffinPlans(provider.provider.userId)
+              }
+            >
+              {visiblePlans[provider.provider.userId]
+                ? "Hide Plans"
+                : "View Plans"}
             </button>
 
             {visiblePlans[provider.provider.userId] && (
-  <div className="tiffin-plans">
-    {!plansByProvider[provider.provider.userId] ? (
-      <p>Loading plans...</p>
-    ) : plansByProvider[provider.provider.userId].length === 0 ? (
-      <p>No plans available.</p>
-    ) : (
-      plansByProvider[provider.provider.userId].map((plan) => (
-        <div key={plan.planId} className="tiffin-plan-card">
-          <p><strong>Name:</strong> {plan.name}</p>
-          <p><strong>Description:</strong> {plan.description}</p>
-          <p><strong>Duration:</strong> {plan.durationDays} days</p>
-          <p><strong>Meal Type:</strong> {plan.mealType}</p>
-          <p><strong>Price/Day:</strong> ₹{plan.pricePerDay}</p>
-          <p><strong>Status:</strong> {plan.isActive ? "Active" : "Inactive"}</p>
-          <button className={'getplan-btn'}>Get Plan</button>
-          <hr/>
-        </div>
-      ))
-    )}
-  </div>
-)}
+              <div className="tiffin-plans">
+                {!plansByProvider[provider.provider.userId] ? (
+                  <p>Loading plans...</p>
+                ) : plansByProvider[provider.provider.userId].length === 0 ? (
+                  <p>No plans available.</p>
+                ) : (
+                  plansByProvider[provider.provider.userId].map((plan) => (
+                    <div key={plan.planId} className="tiffin-plan-card">
+                      <p>
+                        <strong>Name:</strong> {plan.name}
+                      </p>
+                      <p>
+                        <strong>Description:</strong> {plan.description}
+                      </p>
+                      <p>
+                        <strong>Duration:</strong> {plan.durationDays} days
+                      </p>
+                      <p>
+                        <strong>Meal Type:</strong> {plan.mealType}
+                      </p>
+                      <p>
+                        <strong>Price/Day:</strong> ₹{plan.pricePerDay}
+                      </p>
+                      <p>
+                        <strong>Status:</strong>{" "}
+                        {plan.isActive ? "Active" : "Inactive"}
+                      </p>
 
+                      <button
+                        className="getplan-btn"
+                        onClick={() => handleGetPlan(plan.planId)}
+                        disabled={subscribingPlan === plan.planId}
+                      >
+                        {subscribingPlan === plan.planId
+                          ? "Subscribing..."
+                          : "Get Plan"}
+                      </button>
+
+                      <hr />
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
           </div>
         ))}
     </div>
