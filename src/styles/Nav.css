@@ -21,7 +21,7 @@
 }
 
 .nav-container {
-  background-color: rgb(21, 189, 208);
+  background-color: rgb(255, 255, 255);
   height: 8vh;
   width: 90vw;
   display: flex;
@@ -65,7 +65,7 @@
 
 .rightnav li .nav-link{
   border: 0.5px solid rgb(10, 3, 98);
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 194, 27);
   padding: 5px;
   color:rgb(1, 1, 35)
 }
@@ -75,6 +75,7 @@
   transition: top 3s;
   position: relative;
   top: 2px;
+  border-top: 2px solid black;
 }
 .nav-link {
   text-decoration: none;
@@ -98,12 +99,14 @@
   color: white;
   padding: 5px;
   border-radius: 5px;
+  border: 1px solid orangered;
   /* box-shadow: 3px 3px 3px rgb(240, 89, 13); */
   /* width:200px; */
 }
 
 .login-btn:hover {
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(255, 194, 27);
+  color:rgb(255, 0, 0);
   transition: top 2s;
   position: relative;
   top: 2px;

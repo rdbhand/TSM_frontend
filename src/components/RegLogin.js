@@ -1,4 +1,5 @@
 import Nav from "./Nav";
+import Footer from "./Footer";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -323,6 +324,7 @@ const handleLogin = async (e) => {
           </div>
         )}
       </form>
+      <Footer/>
     </>
   );
 }

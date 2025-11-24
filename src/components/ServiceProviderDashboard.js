@@ -8,17 +8,18 @@ import ProviderForm from "./ServiceProviderPages/ProviderForm";
 import PlanForm from "./ServiceProviderPages/PlanForm";
 import ProfilePage from "./ServiceProviderPages/ProfilePage";
 import TiffinMenu from "./ServiceProviderPages/TiffinMenu";
+import UsersSubscribed from "./ServiceProviderPages/UsersSubscribed";
 
 function ServiceProviderDashboard() {
   const navigate = useNavigate();
 
-  const { userData, setUserData } = useContext(UserContext);
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
 
   const [selectedPage, setSelectedPage] = useState("dashboard");
 
   const handleLogout = () => {
     alert("Logout Successful!");
-    setUserData({});
+    sessionStorage.setItem("userData", null);
     navigate("/");
   };
 
@@ -124,7 +125,7 @@ function ServiceProviderDashboard() {
 
           {selectedPage === "plans" && (
             <div>
-              <h2>Manage Plans Page</h2>
+              <h2>Manage Tiffin Plans</h2>
               <PlanForm userData={userData} />
             </div>
           )}
@@ -136,12 +137,13 @@ function ServiceProviderDashboard() {
           )}
           {selectedPage === "users" && (
             <div>
-              <h2>Users</h2>
+              <h2>Manage Users</h2>
+              <UsersSubscribed/>
             </div>
           )}
           {selectedPage === "payments" && (
             <div>
-              <h2>Payments</h2>
+              <h2>Payments Details</h2>
             </div>
           )}
           {selectedPage === "feedback" && (

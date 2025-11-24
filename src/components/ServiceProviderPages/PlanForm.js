@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function PlanForm({ userData }) {
+export default function PlanForm() {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -10,6 +10,8 @@ export default function PlanForm({ userData }) {
     is_active: true,
   });
 
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+  
   const [plans, setPlans] = useState([]);
 
   const handleChange = (e) => {

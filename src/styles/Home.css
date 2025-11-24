@@ -38,6 +38,8 @@ h1{
 }
 
 .left-poster{
+  color:rgb(178, 112, 7);
+  background-color: white;
   width: 50%;
   height: 100%;;
   display: flex;
@@ -47,9 +49,24 @@ h1{
   text-align: center;
   border-radius:5px;
   align-content: center;
-  padding:10px;
-  border: 1px solid rgb(2, 0, 105);
+  padding:30px;
+  border: 1px solid rgb(4, 3, 63);
   box-shadow: 5px 5px 5px rgba(16, 50, 129, 0.4);
+}
+
+.left-poster h1{
+  color:rgb(7, 45, 255);
+}
+
+.left-poster *{
+  border-radius: 5px;
+  padding:5px;
+}
+
+.left-poster:hover, .right-poster:hover{
+  position: relative;
+  top:5px;
+  border-top: 5px solid rgb(0, 0, 0);
 }
 
 .right-poster{
@@ -98,4 +115,11 @@ h1{
   border-radius: 10px;
   border: 1px solid rgb(2, 0, 105);
   box-shadow: 5px 5px 5px rgba(16, 50, 129, 0.4);
+}
+
+.feature-item:hover{
+  box-shadow: 5px 5px 15px rgba(16, 50, 129, 0.7);
+  position: relative;
+  top:5px;
+  border-top: 5px solid rgb(7, 45, 255);
 }

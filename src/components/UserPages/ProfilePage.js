@@ -117,10 +117,7 @@ export default function ProfilePage() {
           onChange={handleChange}
         />
           <strong>Role :</strong>
-        <select name="role" value={profile.role} readOnly>
-          <option value="user">User</option>
-          <option value="serviceProvider">Service Provider</option>
-        </select>
+        <input type="text" name="role" value={profile.role} readOnly/>
         <br/> <br/>
         <button type="submit" className="bg-blue-600 text-white p-2 rounded">
           Update Profile

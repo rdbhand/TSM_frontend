@@ -11,8 +11,8 @@ function Home() {
   <div className="home-container">
     <div className="home-poster">  
       <div className="left-poster">
-        <h1>Welcome to Tiffin Service Management</h1>
-        <h3>Healthy Homemade Tiffins Delivered Daily / Monthly</h3>
+        <h1>Welcome to Web Based Tiffin Service Management System</h1>
+        <h3>A Platform for Managing Tiffin Services for Tiffin Service Providers and Customers</h3>
         <div>
             {/* <Link to="/reglogin" className="login-btn">Login as Customer</Link> &nbsp; &nbsp;&nbsp; &nbsp; */}
             <Link to="/reglogin" className="login-btn">Get Started !</Link>
