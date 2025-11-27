@@ -92,7 +92,9 @@ const handleLogin = async (e) => {
 
   return (
     <>
-      <Nav />
+    <Nav />
+    <div className="reglogin-container">
+      
       <div className="role-selection">
         {reg && "Register as : "}
         {!reg && "Login as : "} &nbsp; &nbsp; &nbsp;
@@ -324,7 +326,15 @@ const handleLogin = async (e) => {
           </div>
         )}
       </form>
+      {!reg && <br/>}
+      {!reg && <br/>}
+      {!reg && <br/>}
+      {!reg && <br/>}
+      {!reg && <br/>}
+      {!reg && <br/>}
+      {!reg && <br/>}
       <Footer/>
+    </div>
     </>
   );
 }

@@ -1,28 +1,28 @@
 import { useState } from "react";
 
 export default function Feedback() {
-  const [feedbackText, setFeedbackText] = useState("");
+  const [feedback_text, setFeedbackText] = useState("");
   const [rating, setRating] = useState(5);
   const [message, setMessage] = useState("");
   const [selectedSubscription, setSelectedSubscription] = useState("");
-
   // ------------------- LOAD DATA FROM SESSION STORAGE -------------------
   const user = JSON.parse(sessionStorage.getItem("userData")); // { id, name, email, ... }
 
   // ------------------- FETCH SUBSCRIPTIONS OF USER ----------------------
-  const subscriptions=(JSON.parse(sessionStorage.getItem("subscription")) || []);
+  const subscriptions =
+    JSON.parse(sessionStorage.getItem("subscription")) || [];
 
   // ------------------------- SUBMIT FEEDBACK ---------------------------
   const submitFeedback = async (e) => {
     e.preventDefault();
 
     const payload = {
-      userId: user.userId,
-      feedbackText,
+      subscription_id: selectedSubscription,
       rating,
-      subscriptionId: selectedSubscription,
+      feedback_text,
     };
 
+  
     try {
       const response = await fetch("http://localhost:8080/api/feedback/save", {
         method: "POST",
@@ -55,7 +55,7 @@ export default function Feedback() {
       <label style={styles.label}>Select Subscription:</label>
       <select
         value={selectedSubscription}
-        onChange={(e) => setSelectedSubscription(e.target.value)}
+        onChange={(e) => setSelectedSubscription(Number(e.target.value))}
         style={styles.select}
       >
         {subscriptions.length === 0 && <option>No active subscriptions</option>}
@@ -66,7 +66,7 @@ export default function Feedback() {
           </option>
         ))}
       </select>
-        
+
       <form onSubmit={submitFeedback} style={styles.form}>
         {/* ------------------------ RATING ------------------------ */}
         <label style={styles.label}>Rating:</label>
@@ -86,7 +86,7 @@ export default function Feedback() {
         <label style={styles.label}>Your Feedback:</label>
         <textarea
           placeholder="Write your feedback..."
-          value={feedbackText}
+          value={feedback_text}
           onChange={(e) => setFeedbackText(e.target.value)}
           required
           style={styles.textarea}

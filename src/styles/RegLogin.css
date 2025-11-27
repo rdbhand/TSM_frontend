@@ -1,3 +1,8 @@
+.reglogin-container {
+  background-color:rgb(255, 255, 255);  
+  min-height: 100vh;
+  padding: 20px 0;
+}
 .role-selection{
   display: flex;
   flex-direction: row;

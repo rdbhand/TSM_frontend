@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/ServiceProviderDashboard.css";
-import { UserContext } from "./UserContext";
-import { useContext } from "react";
 import { useState } from "react";
 
 import ProviderForm from "./ServiceProviderPages/ProviderForm";
@@ -9,6 +7,8 @@ import PlanForm from "./ServiceProviderPages/PlanForm";
 import ProfilePage from "./ServiceProviderPages/ProfilePage";
 import TiffinMenu from "./ServiceProviderPages/TiffinMenu";
 import UsersSubscribed from "./ServiceProviderPages/UsersSubscribed";
+import Feedback from "./ServiceProviderPages/Feedback";
+import Analytics from "./ServiceProviderPages/Analytics";
 
 function ServiceProviderDashboard() {
   const navigate = useNavigate();
@@ -149,11 +149,12 @@ function ServiceProviderDashboard() {
           {selectedPage === "feedback" && (
             <div>
               <h2>Feedback & Ratings</h2>
+              <Feedback/>
             </div>
           )}
           {selectedPage === "analytics" && (
             <div>
-              <h2>Analytics</h2>
+              <Analytics/>
             </div>
           )}
           {selectedPage === "profile" && (

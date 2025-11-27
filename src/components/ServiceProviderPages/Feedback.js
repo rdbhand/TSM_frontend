@@ -4,7 +4,7 @@ export default function Feedback() {
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Get provider ID from sessionStorage
+  
   const provider = JSON.parse(sessionStorage.getItem("userData"));
   const providerId = provider?.userId;
 

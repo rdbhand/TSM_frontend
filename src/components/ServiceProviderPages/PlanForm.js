@@ -25,7 +25,7 @@ export default function PlanForm() {
   const loadPlans = () => {
     fetch(`http://localhost:8080/api/plans?providerId=${userData.userId}`)
       .then((res) => res.json())
-      // .then((data) => setPlans(data))
+    
       .then((data) => {
   console.log("Fetched plans =", data);
   setPlans(data);
@@ -36,7 +36,7 @@ export default function PlanForm() {
 
   useEffect(() => {
     loadPlans();
-  }, [userData.userId]);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
